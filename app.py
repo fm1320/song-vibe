@@ -26,6 +26,7 @@ def predict():
     from fastapi import FastAPI
     from fastapi.responses import HTMLResponse
     from fastapi.responses import PlainTextResponse
+    from fastapi import JSONResponse
     import uvicorn
 
     app = FastAPI()
@@ -92,7 +93,20 @@ def predict():
             results = results.head(10)
             # print(results)
             merge = pd.merge(results, df, left_on='ann', right_index=True)
-            return {"results": list(merge.to_dict()['category'].values())}
+            
+            results = []
+
+            for song in merge['category'].values():
+
+                track_name, artist_name = song.split(" - ", 1)
+
+                results.append({
+                "track_name": track_name,  
+                "artist_name": artist_name
+                })
+                #return {"results": list(merge.to_dict()['category'].values())}
+            return JSONResponse(results)
+
     uvicorn.run(app, host='0.0.0.0', port=9898)
     sys.exit(0)
 
