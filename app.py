@@ -1,4 +1,36 @@
 import streamlit as st
+import pandas as pd
+import sys
+import faiss
+import numpy as np
+from sentence_transformers import SentenceTransformer
+
+
+
+
+def suggest(song_desc: str = ""):
+            data = pd.read_csv('data.csv')
+            data.rename(columns={'Song_name': 'category', 'Response': 'text'}, inplace=True)
+            df = pd.DataFrame(data, columns = ['text', 'category'])
+            encoder = SentenceTransformer("paraphrase-mpnet-base-v2")
+            index = faiss.read_index('index.bin')
+            search_text = song_desc
+            search_vector = encoder.encode(search_text)
+            _vector = np.array([search_vector])
+            faiss.normalize_L2(_vector)
+
+            k = index.ntotal
+            distances, ann = index.search(_vector, k=k)
+
+            results = pd.DataFrame({'distances': distances[0], 'ann': ann[0]})
+            results = results.head(10)
+            # print(results)
+            merge = pd.merge(results, df, left_on='ann', right_index=True)
+            return {"results": list(merge.to_dict()['category'].values())}
+
+
+
+
 
 # Set page configuration to wide and hide the menu
 st.set_page_config(layout="centered")
@@ -17,9 +49,12 @@ background_style = """
 st.markdown(background_style, unsafe_allow_html=True)
 
 # Text input in the center of the page
-st.markdown("<h1 style='text-align: center; color: white;'>Enter Text</h1>", unsafe_allow_html=True)
-user_input = st.text_input("")
+st.markdown("<h1 style='text-align: center; color: white;'>Tired of songs that you just don't ... vibe with ?</h1>", unsafe_allow_html=True)
+user_input = st.text_input("Describe your mood in the text box below, and we will do the rest. ")
+
 
 # You can do something with the user input here
 if user_input:
-    st.write(f"You entered: {user_input}")
+    a = suggest(user_input)
+    st.write(a)
+
