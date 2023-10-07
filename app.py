@@ -2,7 +2,7 @@ import pandas as pd
 import sys
 import faiss
 
-data = pd.read_csv('data.csv', sep=';')
+data = pd.read_csv('data.csv')
 data.rename(columns={'Song_name': 'category', 'Response': 'text'}, inplace=True)
 # data = data.head(10)
 df = pd.DataFrame(data, columns = ['text', 'category'])
@@ -26,7 +26,7 @@ def predict():
     from fastapi import FastAPI
     from fastapi.responses import HTMLResponse
     from fastapi.responses import PlainTextResponse
-    from fastapi import JSONResponse
+    #from fastapi import JSONResponse
     import uvicorn
 
     app = FastAPI()
@@ -37,7 +37,7 @@ def predict():
 
     @app.get("/")
     async def root():
-        return HTMLResponse("""<!DOCTYPE html>
+            return HTMLResponse("""<!DOCTYPE html>
  <html>
         <head>
                               <meta charset="UTF-8">
@@ -80,6 +80,7 @@ def predict():
                             """)
     
     @app.get("/suggest")
+    @app.get("/suggest")
     async def suggest(song_desc: str = ""):
             search_text = song_desc
             search_vector = encoder.encode(search_text)
@@ -93,25 +94,12 @@ def predict():
             results = results.head(10)
             # print(results)
             merge = pd.merge(results, df, left_on='ann', right_index=True)
-            
-            results = []
-
-            for song in merge['category'].values():
-
-                track_name, artist_name = song.split(" - ", 1)
-
-                results.append({
-                "track_name": track_name,  
-                "artist_name": artist_name
-                })
-                #return {"results": list(merge.to_dict()['category'].values())}
-            return JSONResponse(results)
-
+            return {"results": list(merge.to_dict()['category'].values())}
     uvicorn.run(app, host='0.0.0.0', port=9898)
     sys.exit(0)
 
 if __name__ == '__main__':
-    if len(sys.argv) == 1:
-        train()
-    else:
-        predict()
+    #if len(sys.argv) == 1:
+    #    train()
+    #else:
+    predict()
