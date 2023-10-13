@@ -60,46 +60,69 @@ if user_input:
     st.write(a)
 
 
+original_json=a
+def convert_to_corrected_format(original_json):
+    corrected_json = {"results": []}
+
+    for idx, entry in enumerate(original_json["results"]):
+        parts = entry.split(" - ")
+        if len(parts) == 2:
+            track, artist = parts
+            corrected_json["results"].append({"id": idx, "track": track, "artist": artist})
+
+    return corrected_json
+
+data = convert_to_corrected_format(original_json)
 
 
-import streamlit as st
-import base64
-from requests import post, get
+'''client_id='244ea9a10c0040bbb4ee180a3d8e5519'
+client_secret='31b769f36e2e4c1385b8e67effabcb42'
+redirect_uri="https://expert-meme-9wvvgr466xwc954-8501.app.github.dev/"'''
+   
 import json
-import urllib.parse
+import spotipy
+import streamlit as st
+from spotipy.oauth2 import SpotifyClientCredentials
+from spotipy.oauth2 import SpotifyOAuth
 
 
-# Spotify API credentials
-#SPOTIFY_CLIENT_ID = "244ea9a10c0040bbb4ee180a3d8e5519"
-#SPOTIFY_CLIENT_SECRET = "31b769f36e2e4c1385b8e67effabcb42"
-SPOTIFY_CLIENT_ID = st.secrets['SPOTIFY_CLIENT_ID']
-SPOTIFY_CLIENT_SECRET = st.secrets['SPOTIFY_CLIENT_SECRET']
-REDIRECT_URI = 'https://expert-meme-9wvvgr466xwc954-8501.app.github.dev/'  # You need to set this as a valid redirect URI in your Spotify App settings
+st.title("Create Spotify Playlist")
 
-def get_token():
-    client_id =st.secrets['SPOTIFY_CLIENT_ID']
-    client_secret =st.secrets['SPOTIFY_CLIENT_SECRET']
-    auth_string = client_id + ":" + client_secret
-    auth_bytes = auth_string.encode("utf-8")
-    auth_base64 = str(base64.b64encode(auth_bytes), "utf-8")
+#client_id = st.text_input("Enter Client ID")
+#client_secret = st.text_input("Enter Client Secret")
+CLIENT_ID = '244ea9a10c0040bbb4ee180a3d8e5519'
+CLIENT_SECRET = '31b769f36e2e4c1385b8e67effabcb42'
 
-    url = "https://accounts.spotify.com/api/token"
-    headers = {
-        "Authorization": "Basic " + auth_base64,
-        "Content-type": "application/x-www-form-urlencoded"
-    }
+client_id='244ea9a10c0040bbb4ee180a3d8e5519'
+client_secret='31b769f36e2e4c1385b8e67effabcb42'
+scope = "playlist-modify-public playlist-modify-private"
 
-    data = {"grant_type": "client_credentials"}
-    result = post(url, headers=headers, data=data)
-    json_result = json.loads(result.content)
-    token = json_result["access_token"]
-    return token
+if st.button("Create Playlist"):
 
-def get_headers(token):
-    return {"Authorization": "Bearer " + token}
 
-if st.button('Login with Spotify'):
-    token = get_token()
-    st.write("Sucess")    
+  sp = spotipy.Spotify(
+   auth_manager=SpotifyOAuth(
+        scope="playlist-modify-public playlist-modify-private",
+        redirect_uri='https://expert-meme-9wvvgr466xwc954-8501.app.github.dev/',
+        client_id='244ea9a10c0040bbb4ee180a3d8e5519',
+        client_secret='31b769f36e2e4c1385b8e67effabcb42'
+        
+    )
+  )
 
-    # Save the access token along with any other Spotify API call methods
+  # Create playlist
+  playlist = sp.user_playlist_create(user=sp.me()["id"], name="Song vibe playlist", public=False)
+  
+  # Add tracks to playlist
+  track_ids = []
+  for track in data["results"]:
+    result = sp.search(q=f"track:{track['track']} artist:{track['artist']}", type="track")
+    try:
+      track_ids.append(result["tracks"]["items"][0]["uri"])
+    except IndexError:
+      st.warning(f"Could not find {track['track']} by {track['artist']}")
+
+  sp.playlist_add_items(playlist_id=playlist["id"], items=track_ids)
+  
+  st.success("Playlist created!")
+
