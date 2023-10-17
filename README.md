@@ -11,7 +11,7 @@
 
 </div>
 
-#### This is a tool that gives song recommendations based on vibes and moods. Sometimes the music and playlists we hear don't "hit" our vibe, so we are using AI to try to change that.
+#### *This is a tool that gives song recommendations based on vibes and moods. Sometimes the music and playlists we hear don't "hit" our vibe, so we are using AI to try to change that.*
 
 ## Technical details 
 
