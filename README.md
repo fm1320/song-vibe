@@ -5,8 +5,9 @@
 <div id="top" align="center">
 
 ![GitHub](https://img.shields.io/github/license/fm1320/song-vibe)
-![GitHub Repo stars](https://img.shields.io/github/stars/fm1320/song-vibe?style=social)
-![GitHub forks](https://img.shields.io/github/forks/fm1320/song-vibe?style=social)
+![GitHub Repo stars](https://img.shields.io/github/stars/fm1320/song-vibe?logo=github)
+![GitHub forks](https://img.shields.io/github/forks/fm1320/song-vibe?logo=github)
+
 
 </div>
 
