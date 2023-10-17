@@ -3,7 +3,6 @@ import pandas as pd
 import sys
 import faiss
 import numpy as np
-from PIL import Image
 from sentence_transformers import SentenceTransformer
 
 
@@ -58,8 +57,7 @@ if user_input:
 else:
     st.write("")
 
-image = Image.open('./sp_logo.png')
-st.image(image,width=100)
+st.image('https://images.unsplash.com/photo-1614680376593-902f74cf0d41?auto=format&fit=crop&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&w=1974',width=100)
 if st.button("Hear this playlist on Spotify!"):
        st.text("More songs and full spotify integration coming soon!")
 
