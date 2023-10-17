@@ -3,6 +3,7 @@ import pandas as pd
 import sys
 import faiss
 import numpy as np
+from PIL import Image
 from sentence_transformers import SentenceTransformer
 
 
@@ -53,12 +54,12 @@ user_input = st.text_input("Describe your mood in the text box below, and we wil
 
 # You can do something with the user input here
 if user_input:
-    a = suggest(user_input)
-    st.write(a)
+    st.write(suggest(user_input))
 else:
     st.write("")
 
-st.image('sp_logo.png',width=100)
+image = Image.open('sp_logo.png.jpg')
+st.image(image,width=100)
 if st.button("Hear this playlist on Spotify!"):
        st.text("More songs and full spotify integration coming soon!")
 
