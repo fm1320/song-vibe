@@ -25,7 +25,7 @@ Follow the instructions below to run the Streamlit server locally.
 
 ### Pre-requisites
 
-Make sure you have Python ≥3.10 installed.
+Make sure you have Python ≥3.8 installed.
 
 ### Steps
 
