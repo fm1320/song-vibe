@@ -58,7 +58,7 @@ if user_input:
 else:
     st.write("")
 
-st.image('https://assets.stickpng.com/images/6294f8484609037792ef3715.png',width=100)
+st.image('sp_logo.png',width=100)
 if st.button("Hear this playlist on Spotify!"):
        st.text("More songs and full spotify integration coming soon!")
 
