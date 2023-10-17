@@ -58,7 +58,7 @@ if user_input:
 else:
     st.write("")
 
-image = Image.open('sp_logo.png')
+image = Image.open('./sp_logo.png')
 st.image(image,width=100)
 if st.button("Hear this playlist on Spotify!"):
        st.text("More songs and full spotify integration coming soon!")
