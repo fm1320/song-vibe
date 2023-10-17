@@ -29,12 +29,9 @@ def suggest(song_desc: str = ""):
             print(res_dict)
             return res_dict
 
-
-
-
-
 # Set page configuration to wide and hide the menu
 st.set_page_config(layout="centered")
+
 
 # Background image CSS
 background_style = """
@@ -58,71 +55,13 @@ user_input = st.text_input("Describe your mood in the text box below, and we wil
 if user_input:
     a = suggest(user_input)
     st.write(a)
+else:
+    st.write("")
+
+st.image('https://assets.stickpng.com/images/6294f8484609037792ef3715.png',width=100)
+if st.button("Hear this playlist on Spotify!"):
+       st.text("More songs and full spotify integration coming soon!")
 
 
-original_json=a
-def convert_to_corrected_format(original_json):
-    corrected_json = {"results": []}
 
-    for idx, entry in enumerate(original_json["results"]):
-        parts = entry.split(" - ")
-        if len(parts) == 2:
-            track, artist = parts
-            corrected_json["results"].append({"id": idx, "track": track, "artist": artist})
-
-    return corrected_json
-
-data = convert_to_corrected_format(original_json)
-
-
-'''client_id='244ea9a10c0040bbb4ee180a3d8e5519'
-client_secret='31b769f36e2e4c1385b8e67effabcb42'
-redirect_uri="https://expert-meme-9wvvgr466xwc954-8501.app.github.dev/"'''
-   
-import json
-import spotipy
-import streamlit as st
-from spotipy.oauth2 import SpotifyClientCredentials
-from spotipy.oauth2 import SpotifyOAuth
-
-
-st.title("Create Spotify Playlist")
-
-#client_id = st.text_input("Enter Client ID")
-#client_secret = st.text_input("Enter Client Secret")
-CLIENT_ID = '244ea9a10c0040bbb4ee180a3d8e5519'
-CLIENT_SECRET = '31b769f36e2e4c1385b8e67effabcb42'
-
-client_id='244ea9a10c0040bbb4ee180a3d8e5519'
-client_secret='31b769f36e2e4c1385b8e67effabcb42'
-scope = "playlist-modify-public playlist-modify-private"
-
-if st.button("Create Playlist"):
-
-
-  sp = spotipy.Spotify(
-   auth_manager=SpotifyOAuth(
-        scope="playlist-modify-public playlist-modify-private",
-        redirect_uri='https://expert-meme-9wvvgr466xwc954-8501.app.github.dev/',
-        client_id='244ea9a10c0040bbb4ee180a3d8e5519',
-        client_secret='31b769f36e2e4c1385b8e67effabcb42'
-        
-    )
-  )
-
-  # Create playlist
-  playlist = sp.user_playlist_create(user=sp.me()["id"], name="Song vibe playlist", public=False)
-  
-  # Add tracks to playlist
-  track_ids = []
-  for track in data["results"]:
-    result = sp.search(q=f"track:{track['track']} artist:{track['artist']}", type="track")
-    try:
-      track_ids.append(result["tracks"]["items"][0]["uri"])
-    except IndexError:
-      st.warning(f"Could not find {track['track']} by {track['artist']}")
-
-  sp.playlist_add_items(playlist_id=playlist["id"], items=track_ids)
-  
-  st.success("Playlist created!")
 
