@@ -4,7 +4,7 @@
 
 <div id="top" align="center">
 
-![GitHub](https://img.shields.io/github/license/fm1320/song-vibe)
+![GitHub](https://img.shields.io/github/license/fm1320/song-vibe?link=https%3A%2F%2Fgithub.com%2Ffm1320%2Fsong-vibe%2Fblob%2Fmain%2FLICENSE)
 ![GitHub Repo stars](https://img.shields.io/github/stars/fm1320/song-vibe?logo=github)
 ![GitHub forks](https://img.shields.io/github/forks/fm1320/song-vibe?logo=github)
 
