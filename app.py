@@ -5,15 +5,26 @@ import faiss
 import numpy as np
 from sentence_transformers import SentenceTransformer
 
+@st.cache_data
+def read_from_data():
+            dataframe = pd.read_csv('data.csv')
+            return dataframe
+            
+@st.cache_resource  
+            def load_model():
+            return SentenceTransformer("paraphrase-mpnet-base-v2")
 
+@st.cache_data
+            def load_index():
+            return faiss.read_index('index.bin')
 
-
+            
 def suggest(song_desc: str = ""):
-            data = pd.read_csv('data.csv')
+            data = read_from_data()
             data.rename(columns={'Song_name': 'category', 'Response': 'text'}, inplace=True)
             df = pd.DataFrame(data, columns = ['text', 'category'])
-            encoder = SentenceTransformer("paraphrase-mpnet-base-v2")
-            index = faiss.read_index('index.bin')
+            encoder = load_model()
+            index = load_index()
             search_text = song_desc
             search_vector = encoder.encode(search_text)
             _vector = np.array([search_vector])
