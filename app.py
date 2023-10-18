@@ -11,11 +11,11 @@ def read_from_data():
             return dataframe
             
 @st.cache_resource  
-            def load_model():
+def load_model():
             return SentenceTransformer("paraphrase-mpnet-base-v2")
 
 @st.cache_data
-            def load_index():
+def load_index():
             return faiss.read_index('index.bin')
 
             
