@@ -53,7 +53,7 @@ background_style = """
     }
 </style>
 """
-#st.secrets['SPOTIFY_CLIENT_ID']
+
 # Display the background style
 st.markdown(background_style, unsafe_allow_html=True)
 
@@ -70,7 +70,9 @@ else:
 
 st.image('https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Spotify_logo_with_text.svg/1118px-Spotify_logo_with_text.svg.png',width=200)
 if st.button("Hear this playlist on Spotify!"):
-       st.text("More songs and full spotify integration coming soon!")
+       st.text('''More songs and full spotify integration coming soon! 
+The Spotify version is in beta, to try it out contact me:
+@filip.makraduli@marks-and-spencer.com ''')
 
 
 
