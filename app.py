@@ -53,7 +53,7 @@ background_style = """
     }
 </style>
 """
-
+st.secrets['SPOTIFY_CLIENT_ID']
 # Display the background style
 st.markdown(background_style, unsafe_allow_html=True)
 
