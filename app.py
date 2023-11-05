@@ -53,7 +53,7 @@ background_style = """
     }
 </style>
 """
-st.secrets['SPOTIFY_CLIENT_ID']
+#st.secrets['SPOTIFY_CLIENT_ID']
 # Display the background style
 st.markdown(background_style, unsafe_allow_html=True)
 
@@ -68,7 +68,7 @@ if user_input:
 else:
     st.write("")
 
-st.image('https://images.unsplash.com/photo-1614680376593-902f74cf0d41?auto=format&fit=crop&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&w=1974',width=200)
+st.image('https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Spotify_logo_with_text.svg/1118px-Spotify_logo_with_text.svg.png',width=200)
 if st.button("Hear this playlist on Spotify!"):
        st.text("More songs and full spotify integration coming soon!")
 
