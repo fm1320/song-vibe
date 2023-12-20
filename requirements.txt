@@ -73,7 +73,7 @@ torch==2.1.0
 torchvision==0.16.0
 tornado==6.3.3
 tqdm==4.66.1
-transformers==4.34.0
+transformers==4.36.0
 triton==2.1.0
 typing_extensions==4.8.0
 tzdata==2023.3
