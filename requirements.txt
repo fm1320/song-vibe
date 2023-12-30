@@ -62,7 +62,7 @@ sentencepiece==0.1.99
 six==1.16.0
 smmap==5.0.1
 spotipy==2.23.0
-streamlit
+streamlit=1.29.0
 sympy==1.12
 tenacity==8.2.3
 threadpoolctl==3.2.0
