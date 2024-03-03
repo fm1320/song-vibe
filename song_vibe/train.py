@@ -2,13 +2,12 @@ import pandas as pd
 import sys
 import faiss
 from sentence_transformers import SentenceTransformer
-from utils import load_data
-
-encoder = SentenceTransformer("paraphrase-mpnet-base-v2")
+from song_vibe.utils import load_data, load_model
 
 
 def train(data_folder: str = "data"):
-    load_data(data_folder)
+    df = load_data(data_folder)
+    encoder = load_model()
     text = df["text"]
     vectors = encoder.encode(text, show_progress_bar=True)
 
