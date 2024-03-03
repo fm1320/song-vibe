@@ -12,7 +12,11 @@ sentence-transformers = "^2.5.1"
 streamlit = "^1.31.1"
 numpy = "^1.26.4"
 faiss-cpu = "^1.8.0"
+watchdog = "^4.0.0"
 
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.3"
 
 [build-system]
 requires = ["poetry-core"]
