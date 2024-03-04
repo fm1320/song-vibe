@@ -5,18 +5,18 @@ description = ""
 authors = ["Your Name <you@example.com>"]
 readme = "README.md"
 
+
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "~3.10"
 pandas = "^2.2.1"
 sentence-transformers = "^2.5.1"
 streamlit = "^1.31.1"
 numpy = "^1.26.4"
 faiss-cpu = "^1.8.0"
 watchdog = "^4.0.0"
-
-
-[tool.poetry.group.dev.dependencies]
+jupyter = "^1.0.0"
 ipykernel = "^6.29.3"
+
 
 [build-system]
 requires = ["poetry-core"]

@@ -11,6 +11,7 @@ def load_data(folder: str = "data/", file: str = "data.csv") -> pd.DataFrame:
 
 
 def load_model():
+    print("loading model...")
     return SentenceTransformer("paraphrase-mpnet-base-v2")
 
 

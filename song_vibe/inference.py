@@ -2,7 +2,7 @@ import pandas as pd
 import faiss
 import numpy as np
 from sentence_transformers import SentenceTransformer
-from song_vibe.ui.utils import load_data, load_model, load_index
+from song_vibe.utils import load_data, load_model, load_index
 
 
 def suggest(song_desc: str = ""):
