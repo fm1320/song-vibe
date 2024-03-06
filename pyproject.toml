@@ -16,6 +16,7 @@ faiss-cpu = "^1.8.0"
 watchdog = "^4.0.0"
 jupyter = "^1.0.0"
 ipykernel = "^6.29.3"
+torch = "~2.1"
 
 
 [build-system]
