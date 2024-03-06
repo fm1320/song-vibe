@@ -14,5 +14,5 @@ def load_model():
 
 
 @st.cache_data
-def load_index():
-    return utils.load_index()
+def load_index(folder: str = "data/", file: str = "index.bin"):
+    return utils.load_index(folder, file)
