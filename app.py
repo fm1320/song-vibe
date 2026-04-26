@@ -41,9 +41,8 @@ def run():
     )
     if st.button("Hear this playlist on Spotify!"):
         st.text(
-            """More songs and full spotify integration coming soon! 
-    The Spotify version is in beta, to try it out contact me:
-    @filip.makraduli@marks-and-spencer.com """
+            "More songs and full Spotify integration coming soon! "
+            "The Spotify version is in beta. Open an issue on GitHub to try it out."
         )
 
 
