@@ -1,3 +1,5 @@
+
+
 <h1 align="center">
 🎶 Song vibe 🎶
 </h1>
@@ -25,7 +27,7 @@ Follow the instructions below to run the Streamlit server locally.
 
 ### Pre-requisites
 
-Make sure you have Python 3.10 and Poetry installed.
+Make sure you have Python 3.10 or later and Poetry installed.
 
 ### Steps
 
